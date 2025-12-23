@@ -65,5 +65,3 @@ npm run dev
 3.  **Visuals:** The use of emojis and clean tables matches the Japanese aesthetic of "everything in its right place" (Mise en place).
 
 **Would you like me to help you design the `RecipeSchema` (JSON) that handles the "Atomic Scaling" logic??**
-
-<!-- hello -->
