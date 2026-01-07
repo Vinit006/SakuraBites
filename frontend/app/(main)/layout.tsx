@@ -1,14 +1,17 @@
-import {ReactNode} from 'react'
+import { ReactNode } from 'react'
+import Footer from './_components/shared/Footer'
+import Navbar from './_components/shared/Navbar'
 
 type Props = {
-     children: ReactNode
+  children: ReactNode
 }
 
-export default function layout({children}: Props) {
+export default function layout({ children }: Props) {
   return (
-    <div className=' font-sansita text-3xl '>
-     Main layout
-     {children}
+    <div className='  '>
+      <Navbar/>
+      {children}
+      <Footer />
     </div>
   )
 }

@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Sansita } from "next/font/google";
+import { Geist, Sansita, Bitter } from "next/font/google";
 import "./globals.css";
 
 const sansita = Sansita({
-  weight: ["400", "700"],  
+  weight: ["400", "700"],
   subsets: ["latin"],
-  variable: "--font-sansita",  
+  variable: "--font-sansita",
 });
 
-
-const geistMono = Geist({
-  variable: "--font-geist-mono",
+const bitter = Bitter({
   subsets: ["latin"],
+  variable: "--font-bitter",
 });
+
+ 
 
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
   return (
     <html lang="en">
       <body
-        className={`  ${geistMono.variable}  ${sansita.variable} antialiased`}
+        className={`   ${bitter.variable}  ${sansita.variable} antialiased`}
       >
         {children}
       </body>

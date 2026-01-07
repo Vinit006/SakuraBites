@@ -1,7 +1,13 @@
+/*------------------------------------
+Homepage should include
 
+- category 
+
+
+--------------------------------------*/
 export default function page() {
      return (
-          <section className='   border p-2'>
+          <section className=' py-16'>
              Homepage
           </section>
      )
