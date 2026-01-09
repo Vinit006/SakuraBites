@@ -30,7 +30,13 @@ const UserSchema = new Schema({
           type: String,
           default: 'https://cdn-icons-png.flaticon.com/512/6596/6596121.png'
      },
-    
+     preferences: {
+          dietary: [{ type: String, index: true }], // vegan, keto, nut-free
+          excludedIngredients: [{ type: Schema.Types.ObjectId, ref: 'Ingredient' }],
+          excludedCategories: [{ type: Schema.Types.ObjectId, ref: 'Ingredient' }]
+     },
+     isVerified: { type: Boolean, default: false },
+     otp: String,
      favorites: [{ type: Schema.Types.ObjectId, ref: 'Recipe', index: true }],
      socialLinks: {
           instagram: String,
@@ -43,9 +49,8 @@ const UserSchema = new Schema({
 const IngredientSchema = new Schema({
      name: { type: String, required: true, unique: true, index: true },
      slug: { type: String, unique: true },
-     category: { type: String, index: true }, // 'produce', 'masala', 'dairy'
      image: String,
-     description: String, // For the ingredient info page
+     description: String, // For the ingredient info page -
      nutrientsPer100g: {
           calories: { type: Number, default: 0 },
           protein: { type: Number, default: 0 },
@@ -71,7 +76,7 @@ const InstructionSchema = new Schema({
      text: { type: String, required: true },
      isHeading: { type: Boolean, default: false },
      image: String,
-     timerSeconds: Number, // For in-app cooking mode
+
 }, { _id: false })
 
 const RecipeSchema = new Schema({
@@ -94,7 +99,7 @@ const RecipeSchema = new Schema({
      // Discovery & Organization
      categories: [{ type: String, index: true }], // ['Dinner', 'Italian']
      tags: [{ type: String, index: true }], // ['Quick', 'High Protein']
-     cuisine: { type: String, index: true },
+
      relatedRecipeIds: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
      // Total nutrients (Calculated on save based on ingredients)
      totalNutrients: {
@@ -110,7 +115,16 @@ const RecipeSchema = new Schema({
           favoriteCount: { type: Number, default: 0 }
      },
 
-     isPrivate: { type: Boolean, default: false, index: true },
+     dataComplete: [
+          {
+               initiated: { type: Boolean, default: false },
+               scaling: { type: Boolean, default: false },
+               ingredients: { type: Boolean, default: false },
+               instructions: { type: Boolean, default: false },
+               finialized: { type: Boolean, default: false }
+          }
+     ],
+
      isDeleted: { type: Boolean, default: false, index: true }
 }, baseOptions)
 
@@ -195,8 +209,6 @@ const NotificationSchema = new Schema({
           index: true
      },
 
-
-
      // Lightweight message for in-app display
      title: String,
      message: String,
@@ -225,11 +237,30 @@ const NotificationPreferenceSchema = new Schema({
      },
 
      preferences: {
-          RECIPE_REVIEW: { type: Boolean, default: true },
-          RECIPE_QUESTION: { type: Boolean, default: true },
-          QUESTION_ANSWERED: { type: Boolean, default: true },
-          NEW_RECIPE_FROM_FOLLOWING: { type: Boolean, default: true },
-          SYSTEM: { type: Boolean, default: true }
+          RECIPE_REVIEW: {
+               type: Boolean,
+               default: true
+          },
+          RECIPE_REVIEW: {
+               type: Boolean,
+               default: true
+          },
+          RECIPE_QUESTION: {
+               type: Boolean,
+               default: true
+          },
+          QUESTION_ANSWERED: {
+               type: Boolean,
+               default: true
+          },
+          NEW_RECIPE_FROM_FOLLOWING: {
+               type: Boolean,
+               default: true
+          },
+          SYSTEM: {
+               type: Boolean,
+               default: true
+          }
      }
 
 }, baseOptions)
@@ -244,4 +275,3 @@ export const MealPlan = mongoose.model('MealPlan', MealPlanSchema)
 export const Review = mongoose.model('Review', ReviewSchema)
 export const Interaction = mongoose.model('Interaction', InteractionSchema)// Define your user models here
 export const Question = mongoose.model('Question', QuestionSchema);
-
