@@ -1,0 +1,36 @@
+### recipe/chicken-with-dried-apricot-sauce-PSZ
+GET http://localhost:5000/api/v1/recipe/chicken-with-dried-apricot-sauce-PSZ?type=RECIPE
+
+
+
+### recipe/ingredient/:slug
+GET http://localhost:5000/api/v1/recipe/ingredient/chicken-with-dried-apricot-sauce-PSZ?type=RECIPE
+
+
+### Post Request
+POST http://localhost:5000/api/v1/auth/signup
+Content-Type: application/json
+
+{
+  "email": "vp.menon06@gmail.com"
+}
+
+
+### Post Request
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "vp.menon06@gmail.com"
+}
+
+
+
+### Post Request
+POST http://localhost:5000/api/v1/auth/verify-otp
+Content-Type: application/json
+
+{
+  "otp": "178109",
+  "email": "vp.menon06@gmail.com"
+}

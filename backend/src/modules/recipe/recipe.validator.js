@@ -7,3 +7,15 @@ export const createRecipeSchema = z.object({
   }),
 });
 */
+
+export const queryRecipeSchema = z.object({
+  query: z.object(
+    {
+      type: z.enum(['RECIPE', 'INGREDIENT']).optional(),
+    },
+    {
+      required_error: 'query is required',
+      invalid_type_error: 'query must be an object',
+    }
+  ),
+});
