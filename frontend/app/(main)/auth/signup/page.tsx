@@ -21,6 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const SignupPage = () => {
   const [step, setStep] = useState<"email" | "otp">("email");
@@ -99,10 +100,19 @@ const SignupPage = () => {
                 )}
               />
 
+              <div className="text-center">
+                <p>
+                  Already Have An Account?{" "}
+                  <Link href={"/auth/login"}>
+                    <span className=" text-THREE hover:underline">Login</span>
+                  </Link>
+                </p>
+              </div>
+
               <Button
                 disabled={isSubmitting}
                 type="submit"
-                className="w-full py-5 bg-THREE  "
+                className="w-full py-5 bg-THREE hover:bg-THREE/90  "
               >
                 {isSubmitting ? "Sending..." : "Send OTP"}
               </Button>
